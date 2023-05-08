@@ -2,18 +2,18 @@ workflows:
   version: 2
   build:
     jobs:
-      - build:
+      -build:
           filters:
             branches:
               only:
-                - main
+                -main
       -deploy:
           filters:
             branches:
               only:
-                - main
+                -main
           requires:
-            - build
+            -build
 
 orbs:
   ruby: circleci/ruby@1.4.0
@@ -22,17 +22,17 @@ jobs:
   build:
     working_directory: ~/articles
     docker:
-      - image: cimg/ruby:3.1.0
+      -image: cimg/ruby:3.1.0
     steps:
-      - checkout
-      - setup_remote_docker
-      - run:
+      -checkout
+      -setup_remote_docker
+      -run:
           name: hello
           command: echo hello
   deploy:
     docker:
-      - image: cimg/ruby:3.1.0
+      -image: cimg/ruby:3.1.0
     steps:
-      - run:
+      -run:
           name: world
           command: echo world
