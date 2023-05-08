@@ -1,21 +1,12 @@
 version: 2.1
 
 workflows:
-  version: 2
-  build:
+  build-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                -main
+      - build
       - deploy:
-          filters:
-            branches:
-              only:
-                -main
           requires:
-            -build
+            - build
 
 orbs:
   ruby: circleci/ruby@1.4.0
@@ -31,6 +22,7 @@ jobs:
       - run:
           name: hello
           command: echo hello
+
   deploy:
     docker:
       - image: cimg/ruby:3.1.0
