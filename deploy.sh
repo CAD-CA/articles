@@ -1,15 +1,14 @@
-CURRENT_INSTANCE=$(sudo docker ps -a -q --filter ancestor="$IMAGE_NAME" --FORMAT="{{.ID}}")
+CURRENT_INSTANCE=$(sudo docker ps -a -q --filter ancestor="$IMAGE_NAME")
 
-if [ "$CURRENT_INSTANCE" ]
-then
+if [ "$CURRENT_INSTANCE" ]; then
     sudo docker rm $(sudo docker stop $CURRENT_INSTANCE)
 fi
 
 sudo docker pull $IMAGE_NAME
 
-CONTAINER_EXISTS=$(sudo docker ps -a | grep $CONTAINER_NAME)
-if [ "$CONTAINER_EXISTS" ]
-then
+CONTAINER_EXISTS=$(sudo docker ps -a --format "{{.Names}}" | grep $CONTAINER_NAME)
+
+if [ "$CONTAINER_EXISTS" ]; then
     sudo docker rm $CONTAINER_NAME
 fi
 
