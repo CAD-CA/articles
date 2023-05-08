@@ -13,4 +13,4 @@ then
     sudo docker rm $CONTAINER_NAME
 fi
 
-sudo docker run -p --name -d 3000:3000 $CONTAINER_NAME $IMAGE_NAME
+sudo docker run -dp 3000:3000 --name ps $CONTAINER_NAME $IMAGE_NAME
